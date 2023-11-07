@@ -1,113 +1,112 @@
-import Image from 'next/image'
+"use client";
+import { faTrashCan } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Agbalumo } from "next/font/google";
+import { useState } from "react";
 
-export default function Home() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">src/app/page.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+const font = Agbalumo({ weight: "400", subsets: ["latin"] });
 
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700 before:dark:opacity-10 after:dark:from-sky-900 after:dark:via-[#0141ff] after:dark:opacity-40 before:lg:h-[360px] z-[-1]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
+const Home = () => {
+	const [names, setNames] = useState([] as { name: string; id: number }[]);
+	const [current, setCurrent] = useState("");
+	const [choosing, setChoosing] = useState(false);
+	const [chosen, setChosen] = useState("");
 
-      <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
+	return (
+		<main className="flex flex-col h-full p-4 items-center justify-center text-center">
+			<span className={`my-4 text-5xl ${font.className}`}>Name Extractor</span>
+			<span className="text-xl font-light">
+				Insert some names and let the fate choose one!
+			</span>
+			<div className="flex flex-col my-8 px-2 overflow-auto names">
+				{names.map((data, i) => {
+					const deleteElement = () => {
+						setNames(names.filter(n => n.id !== data.id));
+					};
 
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
+					return (
+						<div key={data.id} className="my-1">
+							<input
+								className="mx-4 px-4 py-3 w-64 rounded outline-none duration-200 bg-white dark:bg-black bg-opacity-10 dark:bg-opacity-10 text-xl hover:bg-opacity-20"
+								value={data.name}
+								onChange={e => {
+									const newNames = [...names];
 
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Explore the Next.js 13 playground.
-          </p>
-        </a>
+									newNames[i].name = e.target.value;
+									setNames(newNames);
+								}}
+								onBlur={event => {
+									if (!event.target.value) deleteElement();
+								}}
+							/>
+							<button
+								className="p-3 rounded bg-zinc-300 dark:bg-zinc-700 text-xl enabled:hover:scale-110 enabled:hover:text-red-400 enabled:active:scale-95 duration-500 focus-visible:outline-zinc-400 dark:focus-visible:outline-zinc-600 disabled:opacity-50 disabled:bg-zinc-200 dark:disabled:bg-zinc-800 disabled:cursor-not-allowed"
+								onClick={deleteElement}
+								disabled={choosing}
+							>
+								<FontAwesomeIcon icon={faTrashCan} />
+							</button>
+						</div>
+					);
+				})}
+			</div>
+			<form
+				className="flex"
+				onSubmit={event => {
+					event.preventDefault();
+					setNames([...names, { name: current.trim(), id: names.length }]);
+					setCurrent("");
+				}}
+			>
+				<input
+					className="w-64 mx-4 p-4 rounded outline-none duration-200 bg-zinc-200 dark:bg-zinc-800 text-2xl hover:bg-opacity-80"
+					name="name"
+					placeholder="Insert a name"
+					autoFocus={true}
+					autoComplete="name"
+					value={current}
+					onChange={e => setCurrent(e.target.value)}
+				/>
+				<button
+					className="mx-4 p-4 rounded duration-500 bg-zinc-300 dark:bg-zinc-700 text-xl focus-visible:outline-zinc-400 dark:focus-visible:outline-zinc-600 enabled:hover:scale-110 enabled:active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-zinc-200 dark:disabled:bg-zinc-800"
+					disabled={choosing || !current.trim()}
+				>
+					Add
+				</button>
+			</form>
+			<button
+				className="my-16 p-4 rounded-md duration-500 bg-zinc-300 dark:bg-zinc-700 text-4xl focus-visible:outline-zinc-400 dark:focus-visible:outline-zinc-600 enabled:hover:scale-110 enabled:active:scale-95 enabled:active:text-lime-500 disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-zinc-200 dark:disabled:bg-zinc-800"
+				disabled={choosing || names.length < 2}
+				onClick={() => {
+					setChoosing(true);
+					let found = NaN;
+					let i = 0;
+					let laps = 0;
+					const run = () => {
+						if (laps === 5) found = Math.floor(Math.random() * names.length);
+						setChosen(names[i].name);
+						if (i === found || Math.random() < 0.5 / names.length) {
+							setChoosing(false);
+							return;
+						}
+						i++;
+						if (i === names.length) {
+							i = 0;
+							laps++;
+						}
+						setTimeout(run, names.length * laps + i + 500 / names.length);
+					};
 
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
-}
+					run();
+				}}
+			>
+				Go!
+			</button>
+			<span className="text-2xl" style={{ display: chosen ? "" : "none" }}>
+				I choose <b>{chosen}</b>!
+			</span>
+		</main>
+	);
+};
+
+export default Home;
