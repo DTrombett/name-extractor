@@ -100,11 +100,16 @@ const Home = () => {
 					};
 
 					run();
+					document.querySelector("#chosen")?.scrollIntoView();
 				}}
 			>
 				Go!
 			</button>
-			<span className="text-2xl" style={{ display: chosen ? "" : "none" }}>
+			<span
+				className="text-2xl"
+				style={{ display: chosen ? "" : "none" }}
+				id="chosen"
+			>
 				I choose <b>{chosen}</b>!
 			</span>
 		</main>
