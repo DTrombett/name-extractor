@@ -21,6 +21,22 @@
 	background-color: #bfbfbf;
 }
 
+body {
+	height: max(100vh, calc(2000px / 3));
+}
+
+form > * {
+	margin: 0 min(2vw, 1rem)
+}
+
 .names {
-	max-height: 25vh;
+	max-height: 25%;
+}
+
+.insertedName {
+	width: min(16rem, 43vw);
+}
+
+.nameInput {
+	width: min(16rem, 100%);
 }

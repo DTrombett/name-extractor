@@ -27,7 +27,7 @@ const Home = () => {
 					return (
 						<div key={data.id} className="my-1">
 							<input
-								className="mx-4 px-4 py-3 w-64 rounded outline-none duration-200 bg-white dark:bg-black bg-opacity-10 dark:bg-opacity-10 text-xl hover:bg-opacity-20"
+								className="mx-4 px-4 py-3 rounded outline-none duration-200 bg-white dark:bg-black bg-opacity-20 dark:bg-opacity-10 text-xl hover:bg-opacity-30 insertedName"
 								value={data.name}
 								onChange={e => {
 									const newNames = [...names];
@@ -51,7 +51,7 @@ const Home = () => {
 				})}
 			</div>
 			<form
-				className="flex"
+				className="flex justify-center"
 				onSubmit={event => {
 					event.preventDefault();
 					setNames([...names, { name: current.trim(), id: names.length }]);
@@ -59,7 +59,7 @@ const Home = () => {
 				}}
 			>
 				<input
-					className="w-64 mx-4 p-4 rounded outline-none duration-200 bg-zinc-200 dark:bg-zinc-800 text-2xl hover:bg-opacity-80"
+					className="p-4 rounded outline-none duration-200 bg-zinc-200 dark:bg-zinc-800 text-2xl hover:bg-opacity-80 nameInput"
 					name="name"
 					placeholder="Insert a name"
 					autoFocus={true}
@@ -68,7 +68,7 @@ const Home = () => {
 					onChange={e => setCurrent(e.target.value)}
 				/>
 				<button
-					className="mx-4 p-4 rounded duration-500 bg-zinc-300 dark:bg-zinc-700 text-xl focus-visible:outline-zinc-400 dark:focus-visible:outline-zinc-600 enabled:hover:scale-110 enabled:active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-zinc-200 dark:disabled:bg-zinc-800"
+					className="p-4 rounded duration-500 bg-zinc-300 dark:bg-zinc-700 text-xl focus-visible:outline-zinc-400 dark:focus-visible:outline-zinc-600 enabled:hover:scale-110 enabled:active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-zinc-200 dark:disabled:bg-zinc-800"
 					disabled={choosing || !current.trim()}
 				>
 					Add
@@ -83,18 +83,20 @@ const Home = () => {
 					let i = 0;
 					let laps = 0;
 					const run = () => {
-						if (laps === 5) found = Math.floor(Math.random() * names.length);
+						if (laps === 4 && i === 0)
+							found = Math.floor(Math.random() * names.length);
 						setChosen(names[i].name);
-						if (i === found || Math.random() < 0.5 / names.length) {
-							setChoosing(false);
-							return;
-						}
+						if (Math.random() < 0.5 / names.length || i === found)
+							return setChoosing(false);
 						i++;
 						if (i === names.length) {
 							i = 0;
 							laps++;
 						}
-						setTimeout(run, names.length * laps + i + 500 / names.length);
+						setTimeout(
+							run,
+							(laps + i / names.length) * 10 + 500 / names.length
+						);
 					};
 
 					run();
