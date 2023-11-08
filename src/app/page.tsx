@@ -65,9 +65,7 @@ const Home = () => {
 					autoFocus={true}
 					autoComplete="name"
 					value={current}
-					onChange={e => {
-						setCurrent(e.target.value);
-					}}
+					onChange={e => setCurrent(e.target.value)}
 				/>
 				<button
 					className="p-4 rounded duration-500 bg-zinc-300 dark:bg-zinc-700 text-xl focus-visible:outline-zinc-400 dark:focus-visible:outline-zinc-600 enabled:hover:scale-110 enabled:active:scale-95 disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-zinc-200 dark:disabled:bg-zinc-800"
@@ -88,10 +86,8 @@ const Home = () => {
 						if (laps === 4 && i === 0)
 							found = Math.floor(Math.random() * names.length);
 						setChosen(names[i].name);
-						if (Math.random() < 0.5 / names.length || i === found) {
-							setChoosing(false);
-							return;
-						}
+						if (Math.random() < 0.5 / names.length || i === found)
+							return setChoosing(false);
 						i++;
 						if (i === names.length) {
 							i = 0;
