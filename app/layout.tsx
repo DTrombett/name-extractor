@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 	twitter: {
 		card: "summary_large_image",
 		creator: "DTrombett",
-		images: "https://name-extractor.vercel.app/preview.png",
+		images: "/preview.png",
 	},
 };
 
