@@ -15,6 +15,8 @@ export const metadata: Metadata = {
 		card: "summary_large_image",
 		creator: "DTrombett",
 		images: "/preview.png",
+		title: "Name Extractor",
+		description: "Insert some names and let the fate choose one!",
 	},
 };
 
