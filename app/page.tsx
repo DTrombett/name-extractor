@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Agbalumo } from "next/font/google";
 import { useState } from "react";
 
-const font = Agbalumo({ weight: "400", subsets: ["latin"] });
+const font = Agbalumo({ weight: "400", subsets: ["latin"], display: "swap" });
 
 const Home = () => {
 	const [names, setNames] = useState([] as { name: string; id: number }[]);
