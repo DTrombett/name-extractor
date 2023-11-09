@@ -11,6 +11,11 @@ export const metadata: Metadata = {
 	creator: "D Trombett",
 	generator: "Next.js",
 	publisher: "Vercel",
+	twitter: {
+		card: "summary_large_image",
+		creator: "DTrombett",
+		images: "https://name-extractor.vercel.app/preview.png",
+	},
 };
 
 export default function RootLayout({
